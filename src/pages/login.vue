@@ -1,42 +1,40 @@
 <template>
   <div>
     <h2>Login</h2>
-    <div>姓名：{{ userInfo.name }} 年龄：{{ userInfo.age }}</div>
-    <div>token：{{ token }}</div>
-    <div>getter值：{{ newName }}</div>
-    <button @click="handleUser">更新用户</button>
-    <button @click="handleAge">更新年龄</button>
-    <button @click="handleToken">更新token</button>
+    <div>
+      <h4>token: {{ token }}</h4>
+      <button @click="handleToken">设置token</button>
+      <button @click="goBack">跳转返回</button>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useUserStore } from '@/store/user'; //路径别名，引入store
-import { getList } from '@/apis/user';
+import { useRoute, useRouter } from 'vue-router';
+import { useUserStore } from '@/store/modules/user';
+// import { getList } from '@/apis/user';
 
-const userStore = useUserStore();
+const useToken = useUserStore();
 
 //storeToRefs 会跳过所有的 action 属性
-const { userInfo, token, newName } = storeToRefs(userStore);
+const { token } = storeToRefs(useToken);
 
 //action 属性直接解构
-const { updateUserInfo, updateAge, updateToken } = userStore;
-
-const handleUser = () => {
-  updateUserInfo({ name: 'lisi', age: 24 });
-};
-
-const handleAge = () => {
-  //userInfo是一个ref响应式引用，需通过.value取值
-  updateAge(userInfo.value.age + 1);
-};
+const { updateToken } = useToken;
 
 const handleToken = () => {
-  updateToken('23234');
+  updateToken('123456');
+};
+const route = useRoute();
+const router = useRouter();
+const goBack = () => {
+  // 解析query
+  const { query } = route;
+  router.replace(query.redirect as string);
 };
 
-getList({ id: 2 });
+// getList({ id: 2 });
 </script>
 
 <style scoped lang="scss">
@@ -44,3 +42,4 @@ h2 {
   color: $test-color;
 }
 </style>
+@/store/modules/user

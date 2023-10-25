@@ -40,14 +40,14 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    port: 8080,
+    port: 8070,
     open: true,
     https: false,
     proxy: {
       '/api': {
-        target: '要代理的地址',
-        changeOrigin: true,
-        ws: true,
+        target: 'https://www.fastmock.site/mock/4d2e67fb50bff379114f5abdc8d54dc7/api',
+        secure: false, // 如果是https接口，需要配置这个参数
+        changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
         rewrite: (path: string) => path.replace(/^\/api/, ''),
       },
     },

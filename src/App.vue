@@ -1,9 +1,14 @@
 <script setup lang="ts">
-import Layout from '@/layout/index.vue';
+import { ElConfigProvider } from 'element-plus';
+const zIndex = 3000;
+const size = 'small';
 </script>
 
 <template>
-  <Layout />
+  <!-- <Layout /> -->
+  <el-config-provider :size="size" :z-index="zIndex">
+    <router-view></router-view>
+  </el-config-provider>
 </template>
 
 <style scoped></style>

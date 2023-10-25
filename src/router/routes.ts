@@ -1,4 +1,4 @@
-import Home from '@/pages/home.vue';
+import Layout from '@/layout/index.vue';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const auth = () => {
@@ -14,14 +14,22 @@ const routes = [
     component: () => import('@/pages/login.vue'), //路由懒加载
   },
   {
-    path: '/',
+    path: '',
     // beforeEnter: auth, //路由独享守卫
     name: 'Home', //增加name，动态路由通过name挂载到该子路由下
     meta: {
       title: '系统首页', // 页面标题
       auth: true, //需要登录权限
     },
-    component: Home,
+    component: Layout,
+    redirect: '/home',
+    children: [
+      {
+        path: '/home',
+        name: 'Home',
+        component: () => import('@/pages/home.vue'),
+      },
+    ],
   },
   {
     path: '/:pathMatch(.*)*',

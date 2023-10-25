@@ -1,19 +1,24 @@
 <template>
-  <router-view v-slot="{ Component }">
-    <Transition name="fade" mode="out-in">
-      <component :is="Component" />
-    </Transition>
-  </router-view>
+  <div class="layout">
+    <Classic v-if="layoutMode === 'classic'" />
+    <Horizontal v-else />
+  </div>
 </template>
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.2s ease;
-}
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useSettingsStore } from '@/store/modules/settings';
 
-.fade-enter-from,
-.fade-leave-active {
-  opacity: 0;
+import Classic from './classic/index.vue';
+import Horizontal from './horizontal/index.vue';
+
+const useSettings = useSettingsStore();
+const { layoutMode } = storeToRefs(useSettings);
+</script>
+
+<style scoped lang="scss">
+.layout {
+  width: 100%;
+  height: 100%;
 }
 </style>
