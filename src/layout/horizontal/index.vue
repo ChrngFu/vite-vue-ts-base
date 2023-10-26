@@ -1,16 +1,14 @@
 <template>
   <div class="horizontal">
     <Sidebar />
-
-    <div class="page-content">
+    <el-main class="page-content">
       <Header />
-      <!-- 路由视图 -->
-      <router-view v-slot="{ Component }">
+      <router-view v-slot="{ Component }" style="height: calc(100% - 64px)">
         <Transition name="fade" mode="out-in">
           <component :is="Component" />
         </Transition>
       </router-view>
-    </div>
+    </el-main>
   </div>
 </template>
 <script setup lang="ts">
@@ -22,13 +20,9 @@ import Sidebar from '../sidebar/index.vue';
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
-  border: 1px dashed red;
 
   .page-content {
-    flex: 1;
     height: 100%;
-    border: 1px dashed skyblue;
   }
 }
 .fade-enter-active,

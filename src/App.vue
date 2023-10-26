@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ElConfigProvider } from 'element-plus';
 const zIndex = 3000;
-const size = 'small';
+const size = 'default';
 </script>
 
 <template>

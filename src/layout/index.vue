@@ -1,8 +1,8 @@
 <template>
-  <div class="layout">
-    <Classic v-if="layoutMode === 'classic'" />
+  <el-container class="layout">
+    <Classic v-if="layoutMode === 'horizontal'" />
     <Horizontal v-else />
-  </div>
+  </el-container>
 </template>
 
 <script setup lang="ts">

@@ -1,13 +1,13 @@
 <template>
   <div class="classic">
     <Header />
-    <div class="page-content">
+    <el-main class="page-content">
       <router-view v-slot="{ Component }">
         <Transition name="fade" mode="out-in">
           <component :is="Component" />
         </Transition>
       </router-view>
-    </div>
+    </el-main>
   </div>
 </template>
 <script setup lang="ts">
@@ -19,8 +19,7 @@ import Header from '../header/index.vue';
   height: 100%;
   .page-content {
     width: 100%;
-    height: calc(100% - 64px);
-    border: 1px dashed skyblue;
+    height: calc(100% - 60px);
   }
 }
 .fade-enter-active,
